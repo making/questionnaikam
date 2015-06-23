@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="ja">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+</head>
+<body>
+
+<form th:action="@{/q}" method="POST" th:object="${questionnairesForm}">
+    Title: <input type="text" name="title" th:field="*{title}" placeholder="Title"/>
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="help-block">error!</span>
+    <br/>
+    End of Date : <input type="datetime-local" name="expiredAt" th:field="*{expiredAt}"/>
+    <span th:if="${#fields.hasErrors('expiredAt')}" th:errors="*{expiredAt}" class="help-block">error!</span>
+    <br/>
+    <br/>
+    <fieldset th:each="questionnaireForm,s : ${questionnairesForm.values}">
+        <input type="text" th:field="*{values[__${s.index}__].title}" placeholder="Title of Questionnaire"/>
+        <span th:if="${#fields.hasErrors('values[__${s.index}__].title')}"
+              th:errors="*{values[__${s.index}__].title}"
+              class="help-block">error!</span>
+        <br/>
+        <ul>
+            <li th:each="item,ss: ${questionnaireForm.items}">
+                <input type="text" th:field="*{values[__${s.index}__].items[__${ss.index}__].itemName}"
+                       placeholder="Item Name"/>
+                <span th:if="${#fields.hasErrors('values[__${s.index}__].items[__${ss.index}__].itemName')}"
+                      th:errors="*{values[__${s.index}__].items[__${ss.index}__].itemName}"
+                      class="help-block">error!</span>
+                <button type="submit" formmethod="post"
+                        th:if="${ss.index > 0}"
+                        th:formaction="@{/q(moveItem=true,row=${s.index},itemRow=${ss.index})}">↑
+                </button>
+                <button type="submit" formmethod="post"
+                        th:if="${ss.index > 1}"
+                        th:formaction="@{/q(removeItem=true,row=${s.index},itemRow=${ss.index})}">Remove
+                </button>
+            </li>
+        </ul>
+        <button type="submit" formmethod="post" th:formaction="@{/q(addItem=true,row=${s.index})}">Add an Item</button>
+        <button th:if="${s.index > 0}" type="submit" formmethod="post"
+                th:formaction="@{/q(moveQuestionnaire=true,row=${s.index})}">↑
+        </button>
+        <button th:if="${s.index > 0}" type="submit" formmethod="post"
+                th:formaction="@{/q(removeQuestionnaire=true,row=${s.index})}">Remove
+        </button>
+    </fieldset>
+    <input type="submit" name="addQuestionnaire" value="Add a Questionnaire"/>
+    <input type="submit" value="Create"/>
+</form>
+
+</body>
+</html>

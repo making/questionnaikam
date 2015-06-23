@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="ja">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+</head>
+<body>
+<h2>Created Successfully!</h2>
+
+<p th:if="${questionnaires}">
+    Copy <a th:href="@{/q/{id}(id=${questionnaires.id})}">URL of your Questionnaires</a>!
+</p>
+
+</body>
+</html>

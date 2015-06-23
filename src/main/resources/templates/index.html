@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="ja">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+</head>
+<body>
+<table>
+    <tr th:each="questionnaires : ${questionnairesList}">
+        <td><a th:href="@{'q/' + ${questionnaires.id}}" th:text="${questionnaires.title}"></a></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="ja">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${questionnaires.title}">Questionnaires</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        td {
+            border: 1px solid #494949;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${questionnaires.title}"></h1>
+
+<div id="example"></div>
+<!--<a th:href="@{/q(form)}">New Questionnaires?</a>-->
+<!--<a th:href="@{/q/{id}(id=${questionnaires.id},form)}">Edit</a>-->
+<script th:src="@{/bundle.js}" src="bundle.js"></script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var data = JSON.parse(/*[[${data}]]*/ '[{"id":1,"title":"hello","items":[{"value":300,"color":"#F7464A","highlight":"#FF5A5E","label":"Red"},{"value":50,"color":"#46BFBD","highlight":"#5AD3D1","label":"Green"},{"value":100,"color":"#FDB45C","highlight":"#FFC870","label":"Yellow"},{"value":40,"color":"#949FB1","highlight":"#A8B3C5","label":"Grey"},{"value":120,"color":"#4D5360","highlight":"#616774","label":"Dark Grey"}]}]');
+        render({values: data});
+    });
+</script>
+</body>
+</html>
