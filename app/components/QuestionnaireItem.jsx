@@ -1,5 +1,4 @@
 var React = require('react');
-var request = require('superagent');
 
 var QuestionnaireItem = React.createClass({
     getInitialState: function () {

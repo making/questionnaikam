@@ -2,10 +2,11 @@ var React = require('react');
 var Questionnaire = require('./Questionnaire.jsx');
 var request = require('superagent');
 var Stomp = require('stompjs');
+var SockJS= require('sockjs-client');
 
 var Questionnaires = React.createClass({
     getInitialState: function () {
-        var socket = new WebSocket('ws://' + location.host + '/endpoint');
+        var socket = new SockJS('/endpoint');
         var client = Stomp.over(socket);
         client.debug = null;
         var state = {client: client, data: this.props.data, connected: false};

@@ -28,7 +28,7 @@ public class App {
 
         @Override
         public void registerStompEndpoints(StompEndpointRegistry registry) {
-            registry.addEndpoint("endpoint");
+            registry.addEndpoint("endpoint").withSockJS();
         }
 
         @Override
